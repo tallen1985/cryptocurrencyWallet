@@ -12,17 +12,13 @@
     <div class = "column is-one-third" id="wallet-section">
         <h1>Currency Wallet</h1>
         <div id="wallet-contents">
-            <ul>
-                <li>Bitcoin</li>
-                <li>PolkaDot</li>
-                <li>Dogecoin</li>
-            </ul>
+            <ul id="wallet-items"></ul>
         </div>
         <form id="wallet-input">
             <input type="text" id="amount-input" class="input">
-            <div class="select">
-                <select>
-                  <option>Select currency</option>
+            <div class="select" id="currency-drop-down">
+                <select id="currency-select">
+                  <option selected disabled>Select currency</option>
                   <option value="BTC">Bitcoin</option>
                   <option value="ETH">Ethereum</option>
                   <option value="ADA">Cardano</option>
@@ -35,7 +31,7 @@
                   <option value="LUNA">Luna</option>   
                 </select>
               </div>
-              <button id="submit-button" class="button">Add to Wallet</button>
+              <button id="submit-button" class="button" type="submit">Add to Wallet</button>
         </form>
     </div>
     <div class = "column is-two-thirds" id="content-section">
