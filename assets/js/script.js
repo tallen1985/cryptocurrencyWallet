@@ -38,8 +38,15 @@ function populateWallet(walletArray){
     for (let i=0; i < walletArray.length; i++){
         const newEl = document.createElement('li');
         newEl.textContent = walletArray[i].quantity + " - " + walletArray[i].coinName;
+        const deleteBtn = document.createElement('button');
+        deleteBtn.innerHTML = "x"
+        newEl.appendChild(deleteBtn);
         walletItems.appendChild(newEl);
         }
+}
+
+function deleteWalletItem(walletArray){
+    const index = walletArray[i]
 }
 
 //Set the localStorage function
