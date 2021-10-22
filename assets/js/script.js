@@ -53,6 +53,35 @@ function initStorage() {
 
 initStorage()
 
+function createBubbles(data) {
+    const bubble = document.createElement('div');
+    const innerDIV = document.createElement('div');
+    const logo = document.createElement('img');
+    const addText = document.createElement('p')
+
+    bubble.classList = "content-bubble";
+    innerDIV.classList = "bubble-title";
+    logo.src = `./assets/img/${data.symbol}@2x.png`;
+    innerDIV.appendChild(logo);
+    addText.classList = 'title';
+    addText.textContent = data.name;
+    innerDIV.appendChild(addText);
+    bubble.appendChild(innerDIV);
+
+    innerDIV.classList = "bubble-information";
+    addText.classList = 'exchange-rate';
+    addText.textContent = data.price;
+    innerDIV.appendChild(addText);
+    addText.classList = 'moreInfoSpan';
+    addText.innerHTML = '<a class="moreInfoSpan" href="#">More info</a>  ';
+    innerDIV.appendChild(addText);
+    bubble.appendChild(innerDIV);
+
+
+    contentSection.appendChild(bubble);
+}
+
+
 const fakeData = {
     "symbol": "BTC",
     "show_symbol": "BTC",
@@ -82,13 +111,11 @@ const fakeData = {
                     "name": "Bitfinex",
                     "volume_24h": "19314700",
                     "price": "5512.6"
-                },
-                {...}
+                }
             ]
         },
-        {...},
-        {...}
     ],
     "last_updated_timestamp": 1528987416,
     "remaining": 1133
 };
+createBubbles(fakeData)

@@ -1,0 +1,24 @@
+.content-bubble {
+    display:flex;
+    flex-direction: column;
+    width: 80%;
+    margin: 1.5rem auto;
+    border: 1px darkslategray solid;
+    padding: 1rem;
+    border-radius: 3px;
+}
+    .content-bubble .bubble-title {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+        .content-bubble .bubble-title p {
+            margin-left: 2rem;
+        }
+    
+    .content-bubble .bubble-information {
+        display: flex;
+        justify-content: space-between;
+    }
