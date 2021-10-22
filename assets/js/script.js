@@ -1,3 +1,4 @@
+//Set Global variables
 const walletSection = document.getElementById("wallet-section");
 const walletItems = document.getElementById("wallet-items");
 const walletInput = document.getElementById("wallet-input");
@@ -12,15 +13,26 @@ const apiKeyGraph = "c5nm9kqad3ib3ravd1f0";
 
 let walletArray = [];
 
+//Set Event Listener for Submit button
 walletInput.addEventListener("submit", function(event){
     event.preventDefault()
     const newElement = {
-        coinName: currencySelect.value,
+        coinName: currencySelect[currencySelect.selectedIndex].text,
         quantity: amountInput.value
     };
     
     walletArray.push(newElement);
 
+    populateWallet(walletArray);
+
+    localStorage.setItem("storedWallet", JSON.stringify(walletArray));
+    
+    amountInput.value = "";
+    currencySelect.value = "";
+});
+
+//Populate wallet function
+function populateWallet(walletArray){
     walletItems.innerHTML = "";
 
     for (let i=0; i < walletArray.length; i++){
@@ -28,29 +40,15 @@ walletInput.addEventListener("submit", function(event){
         newEl.textContent = walletArray[i].quantity + " - " + walletArray[i].coinName;
         walletItems.appendChild(newEl);
         }
+}
+
+//Set the localStorage function
+function initStorage() {
+    if (localStorage.getItem('storedWallet')){
+        walletArray = JSON.parse(localStorage.getItem('storedWallet'));
+        populateWallet(walletArray);
+    }
     
-    amountInput.value = "";
-    currencySelect.value = "";
+}
 
-
-});
-
-
-//Idea for setting up wallet object
-// const wallet = [
-//     {
-//         coinName: 'Bitcoin',
-//         quantity: '3',
-//         priceWhenAdded: '45032',
-//         dateAdded: //use momentJS to add unix date code
-//     },
-//     {
-//         coinName: 'DogeCoin',
-//         quantity: '64',
-//         priceWhenAdded: '.32',
-//         dateAdded: //use momentJS to add unix date code
-//     }
-// ]
-
-//we could have a text box that allows for entering purchase price
-//or a checkbox to pull the current price from the api upon adding.
+initStorage()
