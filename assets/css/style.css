@@ -1,3 +1,4 @@
+
 .contentBubble {
     display:flex;
     flex-direction: column;
@@ -22,3 +23,21 @@
         display: flex;
         justify-content: space-between;
     }
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+}
+
+#wallet-section {
+    background-color: #4085be;
+}
+
+#submit-button {
+    background-color: #15b110dc;
+}
+
+#amount-input {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
