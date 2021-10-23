@@ -23,7 +23,7 @@ walletInput.addEventListener("submit", function(event){
     
     walletArray.push(newElement);
 
-    populateWallet(walletArray);
+    populateWallet();
 
     localStorage.setItem("storedWallet", JSON.stringify(walletArray));
     
@@ -32,21 +32,30 @@ walletInput.addEventListener("submit", function(event){
 });
 
 //Populate wallet function
-function populateWallet(walletArray){
+function populateWallet(){
     walletItems.innerHTML = "";
 
     for (let i=0; i < walletArray.length; i++){
         const newEl = document.createElement('li');
         newEl.textContent = walletArray[i].quantity + " - " + walletArray[i].coinName;
         const deleteBtn = document.createElement('button');
-        deleteBtn.innerHTML = "x"
+        deleteBtn.classList = 'delete';
+        deleteBtn.value=i;
+        deleteBtn.onclick = deleteWalletItem;
         newEl.appendChild(deleteBtn);
         walletItems.appendChild(newEl);
         }
 }
 
-function deleteWalletItem(walletArray){
-    const index = walletArray[i]
+function deleteWalletItem(){
+    walletItems.addEventListener('click', function(event){
+        const clickedItem = event.target;
+        if(clickedItem.classList.contains('delete')){
+            const index = clickedItem.value
+            walletArray.splice(index, 1);
+            populateWallet(walletArray);
+        }
+    })
 }
 
 //Set the localStorage function
