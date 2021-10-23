@@ -44,3 +44,7 @@ body {
     margin-bottom: 10px;
     margin-top: 10px;
 }
+
+hr {
+    margin-top: -3px;
+}
