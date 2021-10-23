@@ -23,6 +23,9 @@
         display: flex;
         justify-content: space-between;
     }
+    .contentBubble .exchangeRate {
+        color: black;
+    }
 
 body {
     font-family: 'Open Sans', sans-serif;
