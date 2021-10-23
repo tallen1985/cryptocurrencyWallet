@@ -7,6 +7,7 @@ const currencySelect = document.getElementById("currency-select");
 const currencyDropDown = document.getElementById("currency-drop-down");
 const submitButton = document.getElementById("submit-button");
 const contentSection = document.getElementById("content-section");
+const audioEl = document.querySelector("#audio");
 
 const apiKeyCoin = "13694fdd04de3586";
 const apiKeyGraph = "c5nm9kqad3ib3ravd1f0";
@@ -16,6 +17,7 @@ let walletArray = [];
 //Set Event Listener for Submit button
 walletInput.addEventListener("submit", function(event){
     event.preventDefault()
+        audioEl.play();
     const newElement = {
         coinName: currencySelect[currencySelect.selectedIndex].text,
         quantity: amountInput.value,
