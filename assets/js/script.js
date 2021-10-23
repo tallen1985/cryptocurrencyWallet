@@ -18,7 +18,8 @@ walletInput.addEventListener("submit", function(event){
     event.preventDefault()
     const newElement = {
         coinName: currencySelect[currencySelect.selectedIndex].text,
-        quantity: amountInput.value
+        quantity: amountInput.value,
+        coinSymbol: currencySelect[currencySelect.selectedIndex].value
     };
     
     walletArray.push(newElement);
@@ -39,7 +40,9 @@ function populateWallet(walletArray){
         const newEl = document.createElement('li');
         newEl.textContent = walletArray[i].quantity + " - " + walletArray[i].coinName;
         walletItems.appendChild(newEl);
+        
         }
+    getBubbles(walletArray);
 }
 
 //Set the localStorage function
@@ -53,69 +56,71 @@ function initStorage() {
 
 initStorage()
 
-function createBubbles(data) {
+function createBubble(data) {
     const bubble = document.createElement('div');
-    const innerDIV = document.createElement('div');
+    const titleDIV = document.createElement('div');
+    const infoDIV = document.createElement('div');
     const logo = document.createElement('img');
-    const addText = document.createElement('p')
+    const titleP = document.createElement('p');
+    const exchangeRate = document.createElement('p')
+    const moreInfoLink = document.createElement('a')
 
-    bubble.classList = "content-bubble";
-    innerDIV.classList = "bubble-title";
+    bubble.classList = "contentBubble";
+    titleDIV.classList = "bubbleTitle";
+
     logo.src = `./assets/img/${data.symbol}@2x.png`;
-    innerDIV.appendChild(logo);
-    addText.classList = 'title';
-    addText.textContent = data.name;
-    innerDIV.appendChild(addText);
-    bubble.appendChild(innerDIV);
+    titleDIV.appendChild(logo);
 
-    innerDIV.classList = "bubble-information";
-    addText.classList = 'exchange-rate';
-    addText.textContent = data.price;
-    innerDIV.appendChild(addText);
-    addText.classList = 'moreInfoSpan';
-    addText.innerHTML = '<a class="moreInfoSpan" href="#">More info</a>  ';
-    innerDIV.appendChild(addText);
-    bubble.appendChild(innerDIV);
+    titleP.classList = 'title';
+    titleP.textContent = data.name;
+    titleDIV.appendChild(titleP);
 
+    bubble.appendChild(titleDIV);
+    
+    infoDIV.classList = "bubbleInformation"
+    exchangeRate.classList = 'exchangeRate';
+    exchangeRate.textContent = Number(data.price).toFixed(4) + ' USD'
+    infoDIV.appendChild(exchangeRate);
+
+    moreInfoLink.innerHTML = '<a class="moreInfoSpan" href="#">More info</a>'
+    infoDIV.appendChild(moreInfoLink);
+
+    bubble.appendChild(infoDIV);
 
     contentSection.appendChild(bubble);
 }
 
-
-const fakeData = {
-    "symbol": "BTC",
-    "show_symbol": "BTC",
-    "name": "Bitcoin",
-    "rank": 1,
-    "price": "5524.7112165586",
-    "market_cap": "94433817003.39",
-    "total_volume_24h": "6378793658.5432",
-    "low_24h": "5324.2665427149",
-    "high_24h": "5561.0068476948",
-    "delta_1h": "0.81",
-    "delta_24h": "0.68",
-    "delta_7d": "-15.26",
-    "delta_30d": "-25.26",
-    "markets": [
-        {
-            "symbol": "EUR",
-            "volume_24h": "123707000",
-            "price": "5524.7112165586",
-            "exchanges": [
-                {
-                    "name": "Kraken",
-                    "volume_24h": "50623900",
-                    "price": "5520"
-                },
-                {
-                    "name": "Bitfinex",
-                    "volume_24h": "19314700",
-                    "price": "5512.6"
+function getBubbles(walletArray) {
+    //need to redo it so that it gets all the things at once
+    let symbol = '';
+    if (walletArray.length > 0) {
+        let url = `https://coinlib.io/api/v1/coin?key=${apiKeyCoin}&pref=USD&symbol=`;
+        for (let x = 0; x < walletArray.length; x++) {
+            symbol = walletArray[x].coinSymbol;
+            if (x == 0) {
+                url += symbol
+            } else {
+                url += ',' + symbol;
+            };
+        }
+        contentSection.innerHTML = "";
+        console.log(url)
+        //fetch data based on walletArray's coinSymbol key
+        fetch(url)
+            .then(function (response) {
+                console.log(response);
+            return response.json();
+            })
+            .then(function (data) {
+                if (walletArray.length == 1) {
+                    createBubble(data);
+                    console.log(data.remaining);
+                } else {
+                    for (let i = 0; i < data.coins.length; i++) {
+                        createBubble(data.coins[i]);
+                        console.log(data.remaining);
+                    }
                 }
-            ]
-        },
-    ],
-    "last_updated_timestamp": 1528987416,
-    "remaining": 1133
-};
-createBubbles(fakeData)
+            })
+    }
+}
