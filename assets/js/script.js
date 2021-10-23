@@ -25,8 +25,6 @@ walletInput.addEventListener("submit", function(event){
     walletArray.push(newElement);
 
     populateWallet();
-
-    localStorage.setItem("storedWallet", JSON.stringify(walletArray));
     
     amountInput.value = "";
     currencySelect.value = "";
@@ -45,8 +43,10 @@ function populateWallet(){
         deleteBtn.onclick = deleteWalletItem;
         newEl.appendChild(deleteBtn);
         walletItems.appendChild(newEl);
-        
-        }
+    }
+    
+    localStorage.setItem("storedWallet", JSON.stringify(walletArray));
+
     getBubbles(walletArray);
 }
 
