@@ -48,3 +48,7 @@ body {
 hr {
     margin-top: -3px;
 }
+.stockChart {
+    width: 80%;
+    margin: 0 auto;
+}
