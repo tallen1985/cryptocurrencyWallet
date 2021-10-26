@@ -151,7 +151,7 @@ function getBubbles(walletArray) {
                 }
             })
     } else {
-        contentSection.innerHTML = '';
+        contentSection.innerHTML = '<h1 style="color: black;">Nothing Currently in your Wallet</h1>';
     }
 }
 
