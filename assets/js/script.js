@@ -8,6 +8,8 @@ const currencyDropDown = document.getElementById("currency-drop-down");
 const submitButton = document.getElementById("submit-button");
 const contentSection = document.getElementById("content-section");
 const audioEl = document.querySelector("#audio");
+const today = moment().format('X');
+const sevenDaysAgo = moment().subtract('7', 'days').format('X');
 
 const apiKeyCoin = "13694fdd04de3586";
 const apiKeyGraph = "c5nm9kqad3ib3ravd1f0";
@@ -25,8 +27,8 @@ walletInput.addEventListener("submit", function(event){
     };
     
     walletArray.push(newElement);
-
     populateWallet();
+    
     
     amountInput.value = "";
     currencySelect.value = "";
@@ -82,6 +84,7 @@ function createBubble(data) {
     const titleP = document.createElement('p');
     const exchangeRate = document.createElement('p')
     const moreInfoLink = document.createElement('a')
+    const chart = document.createElement('div')
 
     bubble.classList = "contentBubble";
     titleDIV.classList = "bubbleTitle";
@@ -99,6 +102,13 @@ function createBubble(data) {
     exchangeRate.classList = 'exchangeRate';
     exchangeRate.textContent = Number(data.price).toFixed(4) + ' USD'
     infoDIV.appendChild(exchangeRate);
+
+    chart.id = `${data.symbol}Chart`;
+    chart.classList = 'stockChart'
+    chart.innerHTML = `<canvas id="${data.symbol}Canvas" width="300px" height="200px"></canvas>`
+    getStockData(data.symbol, data.symbol + 'Canvas')
+    bubble.append(chart);
+
 
     moreInfoLink.innerHTML = '<a class="moreInfoSpan" href="#">More info</a>'
     infoDIV.appendChild(moreInfoLink);
@@ -140,5 +150,48 @@ function getBubbles(walletArray) {
                     }
                 }
             })
+    } else {
+        contentSection.innerHTML = '<h1 style="color: black;">Nothing Currently in your Wallet</h1>';
     }
 }
+
+// Stock chart part!
+function getStockData(symbol, chartID) {
+    const url = `https://finnhub.io/api/v1/crypto/candle?symbol=BINANCE:${symbol}USDT&resolution=D&from=${sevenDaysAgo}&to=${today}&token=${apiKeyGraph}`;
+    fetch(url)
+            .then(function (response) {
+                console.log(response);
+            return response.json();
+            })
+            .then(function (stockData){
+
+                let xLabels = stockData.t;
+                for (let x = 0; x < xLabels.length; x++) {
+                    xLabels[x] = moment.unix(xLabels[x]).format('M/D');
+                    console.log(xLabels[x]);
+                } 
+                var ctx = document.getElementById(chartID).getContext('2d');
+                    var myChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: xLabels,
+                            datasets: [{
+                                label: 'Closing Value',
+                                data: stockData.c,
+                                borderWidth: 1,
+                                borderColor: "black",
+                                backgroundColor: "yellowgreen",
+                                color: 'white'
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: false
+                                }
+                            }
+                        }
+                    })
+
+                })
+        }
