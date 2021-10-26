@@ -76,7 +76,7 @@ function initStorage() {
 
 initStorage()
 
-function createBubble(data) {
+function createBubble(data, quantity) {
     const bubble = document.createElement('div');
     const titleDIV = document.createElement('div');
     const infoDIV = document.createElement('div');
@@ -85,6 +85,7 @@ function createBubble(data) {
     const exchangeRate = document.createElement('p')
     const moreInfoLink = document.createElement('a')
     const chart = document.createElement('div')
+    const totalAmount = document.createElement('p');
 
     bubble.classList = "contentBubble";
     titleDIV.classList = "bubbleTitle";
@@ -102,6 +103,11 @@ function createBubble(data) {
     exchangeRate.classList = 'exchangeRate';
     exchangeRate.textContent = Number(data.price).toFixed(4) + ' USD'
     infoDIV.appendChild(exchangeRate);
+
+
+    totalAmount.classList = 'exchangeRate';
+    totalAmount.textContent = `Total Value: $${Number(data.price * quantity).toFixed(2)} USD`;
+    infoDIV.appendChild(totalAmount);
 
     chart.id = `${data.symbol}Chart`;
     chart.classList = 'stockChart'
@@ -141,11 +147,11 @@ function getBubbles(walletArray) {
             })
             .then(function (data) {
                 if (walletArray.length == 1) {
-                    createBubble(data);
+                    createBubble(data, walletArray[0].quantity);
                     console.log(data.remaining);
                 } else {
                     for (let i = 0; i < data.coins.length; i++) {
-                        createBubble(data.coins[i]);
+                        createBubble(data.coins[i], walletArray[i].quantity);
                         console.log(data.remaining);
                     }
                 }
