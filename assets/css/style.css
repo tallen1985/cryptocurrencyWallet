@@ -26,6 +26,9 @@
     .contentBubble .exchangeRate {
         color: black;
     }
+    .contentBubble p {
+        color: black;
+    }
 
 body {
     font-family: 'Open Sans', sans-serif;
