@@ -10,9 +10,10 @@ const contentSection = document.getElementById("content-section");
 const audioEl = document.querySelector("#audio");
 const today = moment().format('X');
 const sevenDaysAgo = moment().subtract('7', 'days').format('X');
-
+const sliderEl = document.querySelector("#switch");
 const apiKeyCoin = "13694fdd04de3586";
 const apiKeyGraph = "c5nm9kqad3ib3ravd1f0";
+
 
 let walletArray = [];
 
@@ -75,6 +76,15 @@ function initStorage() {
 }
 
 initStorage()
+
+// sliderEl.addEventListener("click", function() {
+//     if (input === checked) {
+//         default;lasdjkf
+//     } else {
+//         return;
+//     }
+    
+// })
 
 function createBubble(data, quantity) {
     const bubble = document.createElement('div');
@@ -170,7 +180,7 @@ function getStockData(symbol, chartID) {
             return response.json();
             })
             .then(function (stockData){
-
+                console.log(stockData);
                 let xLabels = stockData.t;
                 for (let x = 0; x < xLabels.length; x++) {
                     xLabels[x] = moment.unix(xLabels[x]).format('M/D');
@@ -201,3 +211,11 @@ function getStockData(symbol, chartID) {
 
                 })
         }
+
+sliderEl.addEventListener("click", function() {
+    if (sliderEl.checked) {
+        refreshTime = setInterval(function() {
+            getBubbles(walletArray)},
+            60000)     
+    } else (clearInterval(refreshTime))
+})
