@@ -93,7 +93,7 @@ function createBubble(data, quantity) {
     const logo = document.createElement('img');
     const titleP = document.createElement('p');
     const exchangeRate = document.createElement('p')
-    const moreInfoLink = document.createElement('a')
+    const moreInfoLink = document.createElement('p')
     const chart = document.createElement('div')
     const totalAmount = document.createElement('p');
 
@@ -124,10 +124,10 @@ function createBubble(data, quantity) {
     chart.innerHTML = `<canvas id="${data.symbol}Canvas" width="300px" height="200px"></canvas>`
     getStockData(data.symbol, data.symbol + 'Canvas')
     bubble.append(chart);
-
-
-    moreInfoLink.innerHTML = '<a class="moreInfoSpan" href="#">More info</a>'
+    
+    moreInfoLink.innerHTML = `<p class="moreInfoSpan has-tooltip-multiline" id='${data.name}Info'>More info</p>`
     infoDIV.appendChild(moreInfoLink);
+    toolTip(data.name);
 
     bubble.appendChild(infoDIV);
 
@@ -184,7 +184,6 @@ function getStockData(symbol, chartID) {
                 let xLabels = stockData.t;
                 for (let x = 0; x < xLabels.length; x++) {
                     xLabels[x] = moment.unix(xLabels[x]).format('M/D');
-                    console.log(xLabels[x]);
                 } 
                 var ctx = document.getElementById(chartID).getContext('2d');
                     var myChart = new Chart(ctx, {
@@ -212,6 +211,7 @@ function getStockData(symbol, chartID) {
                 })
         }
 
+
 sliderEl.addEventListener("click", function() {
     if (sliderEl.checked) {
         refreshTime = setInterval(function() {
@@ -219,3 +219,51 @@ sliderEl.addEventListener("click", function() {
             60000)     
     } else (clearInterval(refreshTime))
 })
+
+function toolTip(name) {
+    let wikiName = '';
+    switch(name) {
+        case 'Bitcoin':
+            wikiName = 'Bitcoin';
+            break;
+        case 'Ethereum':
+            wikiName = 'Ethereum'
+            break;
+        case 'Cardano':
+            wikiName = 'Cardano_(blockchain_platform)'
+            break;
+        case 'Litecoin':
+            wikiName = 'Litecoin'
+            break;
+        case 'Binance Coin':
+            wikiName = 'Binance#Cryptocurrencies'
+            break;
+        case 'XRP':
+            wikiName = 'Ripple_(payment_protocol)'
+            break;
+        case 'Polkadot':
+            wikiName = 'Polkadot_(cryptocurrency)'
+            break;
+        case 'USCoin':
+            wikiName = 'USD_Coin'
+            break;
+        case 'Dogecoin':
+            wikiName = 'Dogecoin'
+            break;
+        case 'Luna':
+            wikiName = 'Cryptocurrency'
+            break;
+    }
+        
+    const url = `https://en.wikipedia.org/api/rest_v1/page/summary/${wikiName}`;
+    fetch(url)
+            .then(function (response) {
+                console.log(response);
+            return response.json();
+            })
+            .then(function (data){
+                idTag = name + 'Info'
+                const element = document.getElementById(idTag)
+                element.dataset.tooltip = data.extract;
+            })
+        }
