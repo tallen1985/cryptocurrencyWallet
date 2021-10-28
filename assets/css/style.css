@@ -118,3 +118,7 @@ hr {
   .slider.round:before {
     border-radius: 50%;
   }
+
+  .moreInfoSpan{
+    font-weight: 900;
+  }
