@@ -1,3 +1,17 @@
+.header {
+  height: 35px;
+  width: auto;
+  background-color: #3670a0;
+  color: white;
+  font-size: 27px;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+h1 {
+  margin-top: 5px;
+}
 
 .contentBubble {
     display:flex;
@@ -117,4 +131,10 @@ hr {
   
   .slider.round:before {
     border-radius: 50%;
+  }
+
+  h2 {
+    position: relative;
+    margin-left: 70px;
+    margin-top: -30px;
   }
