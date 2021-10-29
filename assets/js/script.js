@@ -11,7 +11,8 @@ const audioEl = document.querySelector("#audio");
 const today = moment().format('X');
 const sevenDaysAgo = moment().subtract('7', 'days').format('X');
 const sliderEl = document.querySelector("#switch");
-const apiKeyCoin = "13694fdd04de3586";
+// const apiKeyCoin = "13694fdd04de3586";
+const apiKeyCoin = '40cffa8e26da928d'
 const apiKeyGraph = "c5nm9kqad3ib3ravd1f0";
 
 //Initialize the wallet array
@@ -23,15 +24,18 @@ walletInput.addEventListener("submit", function(event){
         audioEl.play();
     const newElement = {
         coinName: currencySelect[currencySelect.selectedIndex].text,
-        quantity: amountInput.value,
+        quantity: amountInput.valueAsNumber,
         coinSymbol: currencySelect[currencySelect.selectedIndex].value
     };
     
     let isDuplicate = false;
 
+    if (newElement.coinName && newElement.quantity){
+
     for(let i=0; i < walletArray.length; i++){
         if (newElement.coinName == walletArray[i].coinName){
-            amountInput.placeholder= 'Duplicate: ' + currencySelect.value;            
+            amountInput.placeholder= 'Duplicate: ' + currencySelect.value;
+            walletArray[i].quantity += newElement.quantity;            
             isDuplicate = true;
         }
     }
@@ -45,6 +49,7 @@ walletInput.addEventListener("submit", function(event){
         
     amountInput.value = "";
     currencySelect.value = "";
+    }
 })    
 
 
