@@ -1,50 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang=“en”>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <link rel="stylesheet" href="./assets/css/bulma-extension.css">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <meta charset=“UTF-8">
+    <meta http-equiv=“X-UA-Compatible” content=“IE=edge”>
+    <meta name=“viewport” content=“width=device-width, initial-scale=1.0">
+    <link rel=“stylesheet” href=“https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css”>
+    <link rel=“stylesheet” href=“./assets/css/bulma-extension.css”>
+    <link href=“https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap” rel=“stylesheet”>
+    <link rel=“stylesheet” href=“./assets/css/style.css”>
     <title>CryptoCurrency Wallet</title>
 </head>
-<body class="columns">
-    <div class = "column is-one-third" id="wallet-section">
-        <h3>Currency Wallet</h3>
+<body>
+  <div class=“header”>Cryptocurrency Wallet</div>
+  <div class=“columns”>
+    <div class = “column is-one-third” id=“wallet-section”>
+        <h1>Currency Wallet</h1>
         <hr>
-        <div id="wallet-contents">
-            <ul id="wallet-items"></ul>
+        <div id=“wallet-contents”>
+            <ul id=“wallet-items”></ul>
         </div>
-        <form id="wallet-input">
-            <input type="text" id="amount-input" class="input">
-            <div class="select" id="currency-drop-down">
-                <select id="currency-select">
+        <form id=“wallet-input”>
+            <input type=“text” id=“amount-input” class=“input”>
+            <div class=“select” id=“currency-drop-down”>
+                <select id=“currency-select”>
                   <option selected disabled>Select currency</option>
-                  <option value="BTC">Bitcoin</option>
-                  <option value="ETH">Ethereum</option>
-                  <option value="ADA">Cardano</option>
-                  <option value="LTC">Litecoin</option>
-                  <option value="BNB">Binance Coin</option>
-                  <option value="XRP">XRP</option>
-                  <option value="DOT">Polkadot</option>
-                  <option value="USDC">USCoin</option>
-                  <option value="DOGE">Dogecoin</option>
-                  <option value="LUNA">Luna</option>   
+                  <option value=“BTC”>Bitcoin</option>
+                  <option value=“ETH”>Ethereum</option>
+                  <option value=“ADA”>Cardano</option>
+                  <option value=“LTC”>Litecoin</option>
+                  <option value=“BNB”>Binance Coin</option>
+                  <option value=“XRP”>XRP</option>
+                  <option value=“DOT”>Polkadot</option>
+                  <option value=“USDC”>USCoin</option>
+                  <option value=“DOGE”>Dogecoin</option>
+                  <option value=“LUNA”>Luna</option>
                 </select>
               </div>
-              <button id="submit-button" class="button" type="submit">Add to Wallet</button>
-              <audio src="assets/sounds/Cash Register  - Sound Effect.mp3" id="audio"></audio>
-              <label class="switch">
-                <input id="switch" type="checkbox">
-                <span class="slider round"></span><br><h2>Auto Refresh</h2>
-              </label>  
+              <button id=“submit-button” class=“button” type=“submit”>Add to Wallet</button>
+              <audio src=“assets/sounds/Cash Register  - Sound Effect.mp3” id=“audio”></audio>
+              <label class=“switch”>
+                <input id=“switch” type=“checkbox”>
+                <span class=“slider round”></span><br><h2>Auto Refresh</h2>
+              </label>
+                <!-- <span class=“slider round”></span> -->
+              </label>
         </form>
     </div>
-    <div class = "column is-two-thirds" id="content-section"></div>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-    <script src="assets/js/script.js"></script>
+    <div class = “column is-two-thirds” id=“content-section”></div>
+    <script src=“https://cdn.jsdelivr.net/npm/chart.js”></script>
+    <script src=“https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js”></script>
+    <script src=“assets/js/script.js”></script>
 </body>
 </html>
