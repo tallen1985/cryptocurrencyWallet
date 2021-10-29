@@ -14,14 +14,15 @@
     <div class="header">CryptoCurrency Wallet</div>
     <div class="columns">
     
-    <div class = "column is-one-third" id="wallet-section">
+    <div class = "column is-one-third " id="wallet-section">
         <h1>Currency Wallet</h1>
         <hr>
         <div id="wallet-contents">
             <ul id="wallet-items"></ul>
         </div>
         <form id="wallet-input">
-            <input type="text" id="amount-input" class="input">
+            <label for="amount-input">Quantity:</label>
+            <input type="number" id="amount-input" class="input " min="0">
             <div class="select" id="currency-drop-down">
                 <select id="currency-select">
                   <option selected disabled>Select currency</option>
