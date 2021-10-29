@@ -31,33 +31,30 @@ walletInput.addEventListener("submit", function(event){
     let isDuplicate = false;
 
     if (newElement.coinName && newElement.quantity){
-
-    for(let i=0; i < walletArray.length; i++){
-        if (newElement.coinName == walletArray[i].coinName){
-            amountInput.placeholder= 'Duplicate: ' + currencySelect.value;
-            walletArray[i].quantity += newElement.quantity;            
-            isDuplicate = true;
+      for(let i=0; i<walletArray.length; i++){
+        if (newElement.coinName ==walletArray[i].coinName){
+          amountInput.placeholder='Duplicate: ' + currencySelect.value;
+          walletArray[i].quantity =+ newElement.quantity;
+          isDuplicate=true;
         }
+      }
+
+      for (let i =0; i <walletArray.length; i++){
+        if(newElement.coinName == walletArray[i].coinName){
+          amountInput.placeholder='Duplicate: ' + currencySelect.value;
+          isDuplicate=true;
+        }
+      }
+      if(isDuplicate==false){
+        walletArray.push(newElement);
+        amountInput.placeholder="Successfully added to wallet!";
+      }
     }
+    populateWallet();
+    amountInput.value="";
+    currencySelect.value="";
 
-  for (let i = 0; i < walletArray.length; i++) {
-    if (newElement.coinName == walletArray[i].coinName) {
-      amountInput.placeholder = "Duplicate: " + currencySelect.value;
-      isDuplicate = true;
-    }
-  }
-
-  if (isDuplicate == false) {
-    walletArray.push(newElement);
-    amountInput.placeholder = "Successfully added to wallet!";
-  }
-
-  populateWallet();
-
-
-  amountInput.value = "";
-  currencySelect.value = "";
-});
+  });
 
 //Populate wallet function
 function populateWallet() {
