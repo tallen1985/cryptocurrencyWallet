@@ -34,7 +34,7 @@ walletInput.addEventListener("submit", function(event){
       for(let i=0; i<walletArray.length; i++){
         if (newElement.coinName ==walletArray[i].coinName){
           amountInput.placeholder='Duplicate: ' + currencySelect.value;
-          walletArray[i].quantity =+ newElement.quantity;
+          walletArray[i].quantity += newElement.quantity;
           isDuplicate=true;
         }
       }
