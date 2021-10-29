@@ -24,8 +24,11 @@ As a cryptocurrency holder, I want to research different cryptocurrencies, So th
 List of APIs 
 
 Coin Library: https://coinlib.io/apidocs
+
 Coin Stock Chart: https://finnhub.io/ 
+
 Wikipedia: https://www.mediawiki.org/wiki/API:Main_page
+
 Bulma.io
 
 Breakdown of Tasks
@@ -38,6 +41,8 @@ Tooltip: Tyler
 Wireframe and User Flow Diagram
 
 ![Wireframe](./assets/img/wireframe.png)
+
+Page Link: https://tsmagoun.github.io/UNH-Project-1/
 
 
 
