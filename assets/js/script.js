@@ -11,23 +11,34 @@ const audioEl = document.querySelector("#audio");
 const today = moment().format("X");
 const sevenDaysAgo = moment().subtract("7", "days").format("X");
 const sliderEl = document.querySelector("#switch");
-const apiKeyCoin = "13694fdd04de3586";
+// const apiKeyCoin = "13694fdd04de3586";
+const apiKeyCoin = '40cffa8e26da928d'
 const apiKeyGraph = "c5nm9kqad3ib3ravd1f0";
 
 //Initialize the wallet array
 let walletArray = [];
 
 //Set Event Listener for Submit button and call populate the wallet
-walletInput.addEventListener("submit", function (event) {
-  event.preventDefault();
-  audioEl.play();
-  const newElement = {
-    coinName: currencySelect[currencySelect.selectedIndex].text,
-    quantity: amountInput.value,
-    coinSymbol: currencySelect[currencySelect.selectedIndex].value,
-  };
+walletInput.addEventListener("submit", function(event){
+    event.preventDefault()
+        audioEl.play();
+    const newElement = {
+        coinName: currencySelect[currencySelect.selectedIndex].text,
+        quantity: amountInput.valueAsNumber,
+        coinSymbol: currencySelect[currencySelect.selectedIndex].value
+    };
+    
+    let isDuplicate = false;
 
-  let isDuplicate = false;
+    if (newElement.coinName && newElement.quantity){
+
+    for(let i=0; i < walletArray.length; i++){
+        if (newElement.coinName == walletArray[i].coinName){
+            amountInput.placeholder= 'Duplicate: ' + currencySelect.value;
+            walletArray[i].quantity += newElement.quantity;            
+            isDuplicate = true;
+        }
+    }
 
   for (let i = 0; i < walletArray.length; i++) {
     if (newElement.coinName == walletArray[i].coinName) {
@@ -42,6 +53,7 @@ walletInput.addEventListener("submit", function (event) {
   }
 
   populateWallet();
+
 
   amountInput.value = "";
   currencySelect.value = "";
