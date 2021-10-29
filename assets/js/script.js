@@ -14,10 +14,10 @@ const sliderEl = document.querySelector("#switch");
 const apiKeyCoin = "13694fdd04de3586";
 const apiKeyGraph = "c5nm9kqad3ib3ravd1f0";
 
-
+//Initialize the wallet array
 let walletArray = [];
 
-//Set Event Listener for Submit button
+//Set Event Listener for Submit button and call populate the wallet
 walletInput.addEventListener("submit", function(event){
     event.preventDefault()
         audioEl.play();
@@ -27,13 +27,26 @@ walletInput.addEventListener("submit", function(event){
         coinSymbol: currencySelect[currencySelect.selectedIndex].value
     };
     
-    walletArray.push(newElement);
+    let isDuplicate = false;
+
+    for(let i=0; i < walletArray.length; i++){
+        if (newElement.coinName == walletArray[i].coinName){
+            amountInput.placeholder= 'Duplicate: ' + currencySelect.value;            
+            isDuplicate = true;
+        }
+    }
+
+    if(isDuplicate == false){
+        walletArray.push(newElement);
+        amountInput.placeholder="Successfully added to wallet!";
+    }
+
     populateWallet();
-    
-    
+        
     amountInput.value = "";
     currencySelect.value = "";
-});
+})    
+
 
 //Populate wallet function
 function populateWallet(){
@@ -55,6 +68,7 @@ function populateWallet(){
     getBubbles(walletArray);
 }
 
+//Deletes wallet items from the wallet array and local storage
 function deleteWalletItem(){
     walletItems.addEventListener('click', function(event){
         const clickedItem = event.target;
@@ -75,17 +89,10 @@ function initStorage() {
     
 }
 
+//Initialize localStorage
 initStorage()
 
-// sliderEl.addEventListener("click", function() {
-//     if (input === checked) {
-//         default;lasdjkf
-//     } else {
-//         return;
-//     }
-    
-// })
-
+//Create Wallet bubble function to populate with the name, image, exchange rate, total wallet value, and more info items
 function createBubble(data, quantity) {
     const bubble = document.createElement('div');
     const titleDIV = document.createElement('div');
@@ -111,7 +118,7 @@ function createBubble(data, quantity) {
     
     infoDIV.classList = "bubbleInformation"
     exchangeRate.classList = 'exchangeRate';
-    exchangeRate.textContent = Number(data.price).toFixed(4) + ' USD'
+    exchangeRate.textContent = 'Exchange Rate: ' + Number(data.price).toFixed(4) + ' USD'
     infoDIV.appendChild(exchangeRate);
 
 
@@ -134,6 +141,7 @@ function createBubble(data, quantity) {
     contentSection.appendChild(bubble);
 }
 
+//Get crypto information to populate the wallet bubbles
 function getBubbles(walletArray) {
     //need to redo it so that it gets all the things at once
     let symbol = '';
@@ -209,9 +217,9 @@ function getStockData(symbol, chartID) {
                     })
 
                 })
-        }
+}
 
-
+//Auto refresh of the wallet bubbles content 
 sliderEl.addEventListener("click", function() {
     if (sliderEl.checked) {
         refreshTime = setInterval(function() {
@@ -220,6 +228,7 @@ sliderEl.addEventListener("click", function() {
     } else (clearInterval(refreshTime))
 })
 
+//Tooltip API to display more information on the various cryptocurrencies when hovering over more info
 function toolTip(name) {
     let wikiName = '';
     switch(name) {
@@ -266,4 +275,4 @@ function toolTip(name) {
                 const element = document.getElementById(idTag)
                 element.dataset.tooltip = data.extract;
             })
-        }
+}
