@@ -142,7 +142,7 @@ function createBubble(data, quantity) {
   getStockData(data.symbol, data.symbol + "Canvas");
   bubble.append(chart);
 
-  moreInfoLink.innerHTML = `<a href="#" class="moreInfoSpan has-tooltip-multiline" id='${data.name}Info'>More info</a>`;
+  moreInfoLink.innerHTML = `<a href="#" target="_blank" class="moreInfoSpan has-tooltip-multiline" id='${data.name}Info'>More info</a>`;
   infoDIV.appendChild(moreInfoLink);
   toolTip(data.name);
 

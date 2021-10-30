@@ -44,6 +44,7 @@ Wireframe and User Flow Diagram
 
 Page Link: https://tsmagoun.github.io/UNH-Project-1/
 
+![Video](./assets/img/Animation.gif)
 
 
 
