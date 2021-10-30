@@ -170,8 +170,10 @@ function getBubbles(walletArray) {
     //fetch data based on walletArray's coinSymbol key
     fetch(url)
       .then(function (response) {
-        console.log(response);
-        return response.json();
+        if (response.ok) {
+          console.log(response);
+          return response.json();
+      }
       })
       .then(function (data) {
         if (walletArray.length == 1) {
@@ -183,6 +185,9 @@ function getBubbles(walletArray) {
             console.log(data.remaining);
           }
         }
+      })
+      .catch(function() {
+        contentSection.innerHTML = '<h1 style="color: black;">Network Error - Please try again later</h1>';
       });
   } else {
     contentSection.innerHTML =
