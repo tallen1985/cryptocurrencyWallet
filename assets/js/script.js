@@ -142,7 +142,7 @@ function createBubble(data, quantity) {
   getStockData(data.symbol, data.symbol + "Canvas");
   bubble.append(chart);
 
-  moreInfoLink.innerHTML = `<a href="https://wikipedia.com/wiki/${data.name}" class="moreInfoSpan has-tooltip-multiline" id='${data.name}Info'>More info</a>`;
+  moreInfoLink.innerHTML = `<a href="#" class="moreInfoSpan has-tooltip-multiline" id='${data.name}Info'>More info</a>`;
   infoDIV.appendChild(moreInfoLink);
   toolTip(data.name);
 
@@ -286,5 +286,6 @@ function toolTip(name) {
       idTag = name + "Info";
       const element = document.getElementById(idTag);
       element.dataset.tooltip = data.extract;
+      element.setAttribute('href', `https://wikipedia.com/wiki/${wikiName}`)
     });
 }
