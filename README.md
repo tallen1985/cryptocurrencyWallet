@@ -42,7 +42,7 @@ Wireframe and User Flow Diagram
 
 ![Wireframe](./assets/img/wireframe.png)
 
-Page Link: https://tsmagoun.github.io/UNH-Project-1/
+Page Link: https://tallen1985.github.io/cryptocurrencyWallet/
 
 ![Video](./assets/img/Animation.gif)
 
